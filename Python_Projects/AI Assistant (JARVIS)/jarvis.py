@@ -1,5 +1,6 @@
 import pyttsx3
 import datetime
+import speech_recognition as sr
 
 engine = pyttsx3.init()
 
@@ -38,4 +39,24 @@ def wish_me():
         speak("Good night Sir!")    
     speak("jarvis at your service, please tell me how can i help you?")
 
-wish_me()
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language = "en-in")
+        print(query)
+
+    except  Exception as e:
+        print(e)
+        speak("Say that again please...")
+
+        return "None"
+
+    return(query)    
+
+takeCommand()
