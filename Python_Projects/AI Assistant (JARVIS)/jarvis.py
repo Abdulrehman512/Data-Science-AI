@@ -2,6 +2,9 @@ import pyttsx3
 import datetime
 import speech_recognition as sr
 import wikipedia
+import smtplib
+import webbrowser as wb
+import os
 
 engine = pyttsx3.init()
 
@@ -58,7 +61,15 @@ def takeCommand():
 
         return "None"
 
-    return(query)    
+    return(query)   
+
+def send_email(to, content):
+    server = smtplib.SMTP("smtp.gmail.com", 587) 
+    server.ehlo()
+    server.starttls()
+    server.login("abc@gmail.com", "123")
+    server.sendmail("abc@gmail.com", to, content)
+    server.close()
 
 if __name__ == "__main__":
     wish_me()
@@ -66,14 +77,41 @@ if __name__ == "__main__":
         query = takeCommand().lower()
         if "time" in query:
             time()
+
         elif "date" in query:
             date()
+
         elif "wikipedia" in query:
             speak("Searching...")
             query = query.replace("wikipedia", "")
             result = wikipedia.summary(query,sentences = 2)
             print(result)
             speak(result)
+
+        elif "send email" in query:
+            try:
+                speak("What should I say?")
+                content = takeCommand()
+                to = "xyz@gmail.com"
+                send_email(to,content)
+                speak("Email has been sent")    
+            except  Exception as e:
+                print(e)
+                speak("Unable to send email")   
+
+        elif "search in chrome" in query:
+            speak("What should i search?")
+            chromepath = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
+            search = takeCommand().lower()
+            wb.get(chromepath).open_new_tab(search +".com")  
+
+        elif "logout" in query:
+            os.system("shutdown -1")
+        elif "shutdown" in query:
+            os.system("shutdown /s /t 1")  
+        elif "restart" in query:
+            os.system("shutdown /r /t 1")  
+
         elif "offline" in query:
             quit()  
         
