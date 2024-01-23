@@ -1,6 +1,7 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
+import wikipedia
 
 engine = pyttsx3.init()
 
@@ -12,21 +13,21 @@ def speak(audio):
 
 def time():
     Time = datetime.datetime.now().strftime("%I:%M:%S")
+    speak("the current time is")
     speak(Time)
 
 def date():
     year = int(datetime.datetime.now().year)
     month = int(datetime.datetime.now().month)
     date = int(datetime.datetime.now().day)
+    speak("the current date is")
     speak(date)
     speak(month)
     speak(year)
 
 def wish_me():
     speak("Welcome back Sir!")
-    speak("the current time is")
     time()
-    speak("the current date is")
     date()
     hour = datetime.datetime.now().hour
     if hour >=6 and hour <12:
@@ -59,4 +60,21 @@ def takeCommand():
 
     return(query)    
 
-takeCommand()
+if __name__ == "__main__":
+    wish_me()
+    while True:
+        query = takeCommand().lower()
+        if "time" in query:
+            time()
+        elif "date" in query:
+            date()
+        elif "wikipedia" in query:
+            speak("Searching...")
+            query = query.replace("wikipedia", "")
+            result = wikipedia.summary(query,sentences = 2)
+            print(result)
+            speak(result)
+        elif "offline" in query:
+            quit()  
+        
+    
