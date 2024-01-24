@@ -5,6 +5,7 @@ import wikipedia
 import smtplib
 import webbrowser as wb
 import os
+import pyautogui
 
 engine = pyttsx3.init()
 
@@ -71,6 +72,11 @@ def send_email(to, content):
     server.sendmail("abc@gmail.com", to, content)
     server.close()
 
+def screenshot():
+    img = pyautogui.screenshot()
+    img.save("C:\\Users\\SC\\Pictures\\Camera Roll\\ss.png")
+
+
 if __name__ == "__main__":
     wish_me()
     while True:
@@ -128,6 +134,10 @@ if __name__ == "__main__":
         elif "do you know anything" in query:
             remember = open("data.txt", "r")
             speak("You said me to remember that" + remember.read())
+
+        elif "screenshot" in query:
+            screenshot()
+            speak("Done!")    
 
         elif "offline" in query:
             quit()  
