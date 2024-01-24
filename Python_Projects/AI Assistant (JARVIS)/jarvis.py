@@ -6,6 +6,7 @@ import smtplib
 import webbrowser as wb
 import os
 import pyautogui
+import psutil
 
 engine = pyttsx3.init()
 
@@ -76,6 +77,12 @@ def screenshot():
     img = pyautogui.screenshot()
     img.save("C:\\Users\\SC\\Pictures\\Camera Roll\\ss.png")
 
+def cpu():
+    usage = str(psutil.cpu_percent())
+    speak("Cpu is at" + usage)
+    battery = psutil.sensors_battery()
+    speak("Battery is at")
+    speak(battery.percent)
 
 if __name__ == "__main__":
     wish_me()
@@ -137,7 +144,10 @@ if __name__ == "__main__":
 
         elif "screenshot" in query:
             screenshot()
-            speak("Done!")    
+            speak("Done!")
+
+        elif "cpu" in query:
+            cpu()        
 
         elif "offline" in query:
             quit()  
