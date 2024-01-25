@@ -21,7 +21,7 @@ def time():
     Time = datetime.datetime.now().strftime("%I:%M:%S")
     speak("the current time is")
     speak(Time)
-
+ #gives output of time in hours, minutes and seconds
 def date():
     year = int(datetime.datetime.now().year)
     month = int(datetime.datetime.now().month)
