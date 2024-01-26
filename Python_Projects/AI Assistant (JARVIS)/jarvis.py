@@ -30,6 +30,7 @@ def date():
     speak(date)
     speak(month)
     speak(year)
+    #gives output of date in day, month and years
 
 def wish_me():
     speak("Welcome back Sir!")
