@@ -46,6 +46,7 @@ def wish_me():
     else:
         speak("Good night Sir!")    
     speak("jarvis at your service, please tell me how can i help you?")
+    #  fives output as greeting and asking how to help
 
 def takeCommand():
     r = sr.Recognizer()
