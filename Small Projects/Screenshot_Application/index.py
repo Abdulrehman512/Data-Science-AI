@@ -5,7 +5,7 @@ import tkinter as tk
 def screenshot():
     # time.sleep(5)
     name = time.time()
-    name = "D:/Applied Data Science & AI Specialization/Small Projects/Screenshot_Application/{}.png".format(name)
+    name = "D:/Applied Data Science & AI Specialization/Small Projects/Screenshot_Application/screenshots/{}.png".format(name)
     img = pyautogui.screenshot()
     img.save(name)
     img.show()
