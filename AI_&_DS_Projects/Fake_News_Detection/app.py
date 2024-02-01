@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st #for frontend / UI
 import pickle
 import re
 from nltk.corpus import stopwords
